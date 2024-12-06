@@ -1,12 +1,22 @@
 package com.sky.mapper;
 
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface EmployeeMapper {
+
+    /**
+     * 查询总记录数
+     * @return
+     */
+    @Select("select count(*) from employee")
+    Integer count();
 
     /**
      * 根据用户名查询员工
@@ -24,4 +34,13 @@ public interface EmployeeMapper {
             "values " +
             "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser})")
     void insert(Employee employee);
+
+    /**
+     * 分页查询
+     * @param start
+     * @param name
+     * @param pageSize
+     * @return
+     */
+    List<Employee> pageQuery(Integer start, String name, int pageSize);
 }
