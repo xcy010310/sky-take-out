@@ -43,4 +43,10 @@ public interface EmployeeMapper {
      * @return
      */
     List<Employee> pageQuery(Integer start, String name, int pageSize);
+
+    /**
+     * 根据主键动态修改属性
+     * @param employee
+     */
+    void update(Employee employee);
 }
