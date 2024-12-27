@@ -1,7 +1,6 @@
 package com.sky.service.impl;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.SetmealDTO;
@@ -25,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * ClassName: SetmealServiceImpl
@@ -79,11 +77,11 @@ public class SetmealServiceImpl implements SetmealService {
     @Override
     public PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO) {
         int pageNum = setmealPageQueryDTO.getPage();
-        int pageSize = setmealPageQueryDTO.getPage();
+        int pageSize = setmealPageQueryDTO.getPageSize();
 
-        PageHelper.startPage(pageNum, pageSize);
-        Page<SetmealVO> page = setmealMapper.pageQuery(setmealPageQueryDTO);
-        return new PageResult(page.getTotal(), page.getResult());
+        setmealPageQueryDTO.setPage((pageNum-1)*pageSize);
+        List<SetmealVO> page = setmealMapper.pageQuery(setmealPageQueryDTO);
+        return new PageResult(page.size(), page);
     }
 
     /**
