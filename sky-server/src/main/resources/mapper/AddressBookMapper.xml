@@ -22,19 +22,19 @@
         update address_book
         <set>
             <if test="consignee != null">
-                consignee = #{consignee}
+                consignee = #{consignee},
             </if>
             <if test="sex != null">
-                sex = #{sex}
+                sex = #{sex},
             </if>
             <if test="phone != null">
-                phone = #{phone}
+                phone = #{phone},
             </if>
             <if test="detail != null">
-                detail = #{detail}
+                detail = #{detail},
             </if>
             <if test="label != null">
-                label = #{label}
+                label = #{label},
             </if>
             <if test="isDefault != null">
                 is_default = #{isDefault}

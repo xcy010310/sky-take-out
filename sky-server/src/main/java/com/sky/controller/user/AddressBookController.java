@@ -2,15 +2,12 @@ package com.sky.controller.user;
 
 import com.sky.context.BaseContext;
 import com.sky.entity.AddressBook;
-import com.sky.mapper.AddressBookMapper;
 import com.sky.result.Result;
 import com.sky.service.AddressBookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,6 +51,19 @@ public class AddressBookController {
     @ApiOperation("新增地址")
     public Result save(@RequestBody AddressBook addressBook) {
         addressBookService.save(addressBook);
+        return Result.success();
+    }
+
+    /**
+     * 修改地址
+     * @param addressBook
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("修改地址")
+    public Result update(@RequestBody AddressBook addressBook) {
+        log.info("修改地址：{}", addressBook);
+        addressBookService.update(addressBook);
         return Result.success();
     }
 
